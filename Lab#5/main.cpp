@@ -62,7 +62,7 @@ void showMenu(){
    
    for (int i = 0; i < 8; i++){
       
-      cout << left << setw(19) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
+      cout << left << setw(20) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
       
    }
    
@@ -74,15 +74,25 @@ int numberOfItems;
 
 void printCheck(){
  
+   double total = 0.00;
+ 
    cout << endl << "Your check:\n";
    
    for (int i = 0; i < numberOfOrders; i++){
       
       cin >> itemFromMenu;
       cin >> numberOfItems;
-      cout << left << setw(19) << menuList[itemFromMenu - 1].menuItem << '\t' << numberOfItems << ' ' << menuList[itemFromMenu - 1].menuPrice << endl;
+      cout << left << setw(20) << menuList[itemFromMenu - 1].menuItem << '\t' << numberOfItems << ' ' << menuList[itemFromMenu - 1].menuPrice * numberOfItems << endl;
+      total += (menuList[itemFromMenu - 1].menuPrice * numberOfItems);
       
    }
+   
+   double tax = total * 0.086;
+   double aDue = total + tax;
+   
+   cout << left << setw(20) << "Amount Total" << total << endl;
+   cout << left << setw(20) << "Tax" << tax << endl;
+   cout << left << setw(20) << "Amount Due" << aDue;
    
 }
 
