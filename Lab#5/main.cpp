@@ -58,11 +58,13 @@ void getData(){
 
 void showMenu(){
    
+   cout << fixed << setprecision(2);
+   
    cout << "Welcome to Johnny Restaurant" << endl;
    
    for (int i = 0; i < 8; i++){
       
-      cout << left << setw(20) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
+      cout << left << setw(19) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
       
    }
    
@@ -74,6 +76,7 @@ int numberOfItems;
 
 void printCheck(){
  
+   
    double total = 0.00;
  
    cout << endl << "Your check:\n";
@@ -82,17 +85,19 @@ void printCheck(){
       
       cin >> itemFromMenu;
       cin >> numberOfItems;
-      cout << left << setw(20) << menuList[itemFromMenu - 1].menuItem << '\t' << numberOfItems << ' ' << menuList[itemFromMenu - 1].menuPrice * numberOfItems << endl;
+      cout << left << setw(16) << menuList[itemFromMenu - 1].menuItem << '\t' << numberOfItems << " $" << menuList[itemFromMenu - 1].menuPrice * numberOfItems << endl;
       total += (menuList[itemFromMenu - 1].menuPrice * numberOfItems);
       
    }
    
-   double tax = total * 0.086;
+   // cout << fixed << setprecision(10);
+   double tax = total * 0.087;
    double aDue = total + tax;
+   // cout << fixed << setprecision(2);
    
-   cout << left << setw(20) << "Amount Total" << total << endl;
-   cout << left << setw(20) << "Tax" << tax << endl;
-   cout << left << setw(20) << "Amount Due" << aDue;
+   cout << left << setw(19) << "Amount Total" << '$' << total << endl;
+   cout << left << setw(19) << "Tax" << '$' << tax << endl;
+   cout << left << setw(19) << "Amount Due" << '$' << aDue;
    
 }
 
@@ -104,8 +109,9 @@ int main() {
    
    getData();
    
-   cout << fixed << setprecision(2);
+   
    showMenu();
+   
    printCheck();
    
    
