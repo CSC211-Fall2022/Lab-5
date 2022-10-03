@@ -25,6 +25,7 @@ void printCheck();
 int main() {
    
    cin >> numberOfOrders;
+   cout << fixed << setprecision(2);
     
    fin.open("menu.txt");
    
@@ -52,7 +53,7 @@ void printCheck(){
       
    }
    
-   double tax = total * 0.086;
+   double tax = total * 0.0886;
    double aDue = total + tax;
    
    cout << left << setw(19) << "Amount Total" << '$' << total << endl;
@@ -63,7 +64,6 @@ void printCheck(){
 
 void showMenu(){
    
-   cout << fixed << setprecision(2);
    
    cout << "Welcome to Johnny Restaurant" << endl;
    
