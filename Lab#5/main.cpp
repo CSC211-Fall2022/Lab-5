@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <vector>
 #include <stdlib.h>
 #include <fstream>
 using namespace std;
@@ -11,7 +12,13 @@ struct menuItemType {
    int count;
 };
 
+struct orderType {
+    int menuItem;
+    int quantity;
+};
+
 menuItemType menuList[8];
+
 ifstream fin;
 
 int numberOfOrders;
@@ -40,18 +47,49 @@ int main() {
 
 void printCheck(){
  
-   double total = 0.00;
+    double total = 0.00;
+    int duplicates = 0;
+    
+    orderType orders[numberOfOrders];
+    vector<orderType> finalOrders;
  
-   cout << endl << "Your check:\n";
-   
-   for (int i = 0; i < numberOfOrders; i++){
-      
-      cin >> itemFromMenu;
-      cin >> numberOfItems;
-      cout << left << setw(16) << menuList[itemFromMenu - 1].menuItem << '\t' << numberOfItems << " $" << menuList[itemFromMenu - 1].menuPrice * numberOfItems << endl;
-      total += (menuList[itemFromMenu - 1].menuPrice * numberOfItems);
-      
-   }
+    for (int i = 0; i < numberOfOrders; i++){
+     
+        cin >> itemFromMenu;
+        cin >> numberOfItems;
+        
+        orders[i].menuItem = itemFromMenu;
+        orders[i].quantity = numberOfItems;
+        
+        for (int j = i-1; j >= 0; j--){
+            if (orders[j].menuItem == orders[i].menuItem){
+                orders[j].quantity += orders[i].quantity;
+                orders[i].menuItem = 0;
+                duplicates++;
+            }
+        }
+        
+    }
+    //fill new vector
+    for (int i = 0; i < numberOfOrders; i++){
+        if (orders[i].menuItem != 0){
+            finalOrders.push_back(orders[i]);
+        }
+    }
+    
+    cout << endl << "Your check:\n";
+    
+    //print contents of vector
+    for (int i = 0; i < numberOfOrders - duplicates; i++){
+        
+        double price = menuList[finalOrders.at(i).menuItem - 1].menuPrice;
+        string item = menuList[finalOrders.at(i).menuItem - 1].menuItem;
+        
+        cout << left << setw(16) << item << '\t' << finalOrders.at(i).quantity << " $" << price * finalOrders.at(i).quantity << endl;
+        total += price * finalOrders.at(i).quantity;
+        
+    }
+    
    
    double tax = total * 0.0886;
    double aDue = total + tax;
@@ -63,7 +101,6 @@ void printCheck(){
 }
 
 void showMenu(){
-   
    
    cout << "Welcome to Johnny Restaurant" << endl;
    
