@@ -85,7 +85,7 @@ void printCheck(){
         double price = menuList[finalOrders.at(i).menuItem - 1].menuPrice;
         string item = menuList[finalOrders.at(i).menuItem - 1].menuItem;
         
-        cout << left << setw(16) << item << '\t' << finalOrders.at(i).quantity << " $" << price * finalOrders.at(i).quantity << endl;
+        cout << left << setw(14) << item << finalOrders.at(i).quantity << "  $" << price * finalOrders.at(i).quantity << endl;
         total += price * finalOrders.at(i).quantity;
         
     }
@@ -94,9 +94,9 @@ void printCheck(){
    double tax = total * 0.0886;
    double aDue = total + tax;
    
-   cout << left << setw(19) << "Amount Total" << '$' << total << endl;
-   cout << left << setw(19) << "Tax" << '$' << tax << endl;
-   cout << left << setw(19) << "Amount Due" << '$' << aDue;
+   cout << left << setw(17) << "Amount Total" << '$' << total << endl;
+   cout << left << setw(17) << "Tax" << '$' << tax << endl;
+   cout << left << setw(17) << "Amount Due" << '$' << aDue << endl;
    
 }
 
@@ -106,7 +106,7 @@ void showMenu(){
    
    for (int i = 0; i < 8; i++){
       
-      cout << left << setw(19) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
+      cout << left << setw(17) << menuList[i].menuItem << '$' << menuList[i].menuPrice << endl;
       
    }
    
